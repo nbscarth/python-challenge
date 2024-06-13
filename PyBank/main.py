@@ -12,14 +12,38 @@ with open(budget_csv) as csvfile:
     
     total_months = 0
     total_PL = 0
+    pl_changes = []
+    prev_column2 = 0
     
     for row in csv_reader:
         total_months += 1
 
-        total_PL += int(row[1]) 
+        column2 = int(row[1])
+        total_PL += column2 
 
         # ave_change = sum(row - prev row)/ number
+        change = column2 - prev_column2
+        pl_changes.append(change)
+        prev_column2 = column2
+
+    # Average change calculation
+    total_changes = 0
+    for value in pl_changes:
+        total_changes += value
+    ave_change = round(total_changes / total_months, 2)
+
+    # Greatest increase and decrease in profits
+    increase = 0
+    decrease = 0
+    for value in pl_changes:
+        if value > increase:
+            increase = value
+        if value < decrease:
+            decrease = value
 
     # Print statements
     print(total_months)
     print(total_PL)
+    print(ave_change)
+    print(increase)
+    print(decrease)
