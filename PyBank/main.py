@@ -7,7 +7,7 @@ budget_csv = os.path.join(csv_path,"Resources","budget_data.csv")
 with open(budget_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
 
-# Gets header and skips for following code
+    # Gets header and skips for following code
     csv_header = next(csv_reader)
     
     total_months = 0
