@@ -58,7 +58,19 @@ with open(budget_csv) as csvfile:
     print("Final Analysis")
     print("--------------------------------------")
     print(f"Total Months: {total_months}")
-    print(f"Total Profit/Loss: ${total_PL}")
+    print(f"Total: ${total_PL}")
     print(f"Average Change: ${ave_change}")
     print(f"Greatest Increase in Profits: {increase_month} (${increase})")
     print(f"Greatest Decrease in Profits: {decrease_month} (${decrease})")
+
+output_file = os.path.join(csv_path, "analysis", "final_analysis.txt")
+
+with open(output_file, "w") as textfile:
+    writer = csv.writer(textfile, delimiter=",")
+    writer.writerow(["Final Analysis"])
+    writer.writerow(["--------------------------------------"])
+    writer.writerow([f"Total Months: {total_months}"])
+    writer.writerow([f"Total: ${total_PL}"])
+    writer.writerow([f"Average Change: ${ave_change}"])
+    writer.writerow([f"Greatest Increase in Profits: {increase_month} (${increase})"])
+    writer.writerow([f"Greatest Decrease in Profits: {decrease_month} (${decrease})"])
