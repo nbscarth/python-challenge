@@ -38,16 +38,32 @@ with open(election_csv) as csvfile:
             winner_total = vote_count
             winner = candidate
 
-
+            
     # Print analysis results
     print("Election Results")
     print("-----------------------------")
     print(f"Total Votes: {ballot_count}")
     print("-----------------------------")
-    # Individual results + print statements
+    # Individual results + print statements 
     for candidate in candidate_list:
         percent = round((candidate_total[candidate] / ballot_count) * 100, 3)
         print(f"{candidate}: {percent}% ({candidate_total[candidate]})")
     print("-----------------------------")
     print(f"Winner: {winner}")
     print("-----------------------------")
+
+output_file = os.path.join(csvpath, "analysis", "election_results.txt")
+
+with open(output_file, "w") as textfile:
+    writer = csv.writer(textfile, delimiter=",")
+
+    writer.writerow(["Election Results"])
+    writer.writerow(["-----------------------------"])
+    writer.writerow([f"Total Votes: {ballot_count}"])
+    writer.writerow(["-----------------------------"])
+    for candidate in candidate_list:
+        percent = round((candidate_total[candidate] / ballot_count) * 100, 3)
+        writer.writerow([f"{candidate}: {percent}% ({candidate_total[candidate]})"])
+    writer.writerow(["-----------------------------"])
+    writer.writerow([f"Winner: {winner}"])
+    writer.writerow(["-----------------------------"])
