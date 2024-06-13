@@ -14,36 +14,51 @@ with open(budget_csv) as csvfile:
     total_PL = 0
     pl_changes = []
     prev_column2 = 0
-    
+    increase = 0
+    decrease = 0 
+    dates = []
+
     for row in csv_reader:
         total_months += 1
 
         column2 = int(row[1])
         total_PL += column2 
 
-        # ave_change = sum(row - prev row)/ number
+        # Creating PL change list
         change = column2 - prev_column2
-        pl_changes.append(change)
-        prev_column2 = column2
+        if row[0] == "Jan-10": # Used start date to establish baseline
+            prev_column2 = column2
+        else:
+            pl_changes.append(change)
+            prev_column2 = column2
+
+        # Creating date list
+        dates.append(row[0])
 
     # Average change calculation
     total_changes = 0
     for value in pl_changes:
         total_changes += value
-    ave_change = round(total_changes / total_months, 2)
+    ave_change = round(total_changes / (total_months - 1), 2)
 
-    # Greatest increase and decrease in profits
-    increase = 0
-    decrease = 0
-    for value in pl_changes:
+    # Greatest increase and decrease in profits   
+    for value in pl_changes:   
         if value > increase:
             increase = value
         if value < decrease:
             decrease = value
 
+    # Finding date of increase and decrease using list indices
+    increase_index = pl_changes.index(increase)
+    increase_month = dates[increase_index + 1]
+    decrease_index = pl_changes.index(decrease)
+    decrease_month = dates[decrease_index + 1]
+
     # Print statements
-    print(total_months)
-    print(total_PL)
-    print(ave_change)
-    print(increase)
-    print(decrease)
+    print("Final Analysis")
+    print("--------------------------------------")
+    print(f"Total Months: {total_months}")
+    print(f"Total Profit/Loss: ${total_PL}")
+    print(f"Average Change: ${ave_change}")
+    print(f"Greatest Increase in Profits: {increase_month} (${increase})")
+    print(f"Greatest Decrease in Profits: {decrease_month} (${decrease})")
