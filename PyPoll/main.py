@@ -13,6 +13,7 @@ with open(election_csv) as csvfile:
     candidate_list = []
     votes = []
     candidate_total = dict()
+    winner_total = 0
 
     for row in csv_reader:
         
@@ -32,19 +33,21 @@ with open(election_csv) as csvfile:
         vote_count = votes.count(candidate)
         candidate_total[candidate] = vote_count
 
-    print(candidate_total)
-    # Percentage of votes each candidate won
-        #total won / total
-    # Total number of votes each candidate won
-        #
-    # Winner of election based on popular vote
-        #name with highest total won
+        # Finds candidate with most votes
+        if vote_count > winner_total:
+            winner_total = vote_count
+            winner = candidate
 
-    #print statements
+
+    # Print analysis results
     print("Election Results")
     print("-----------------------------")
     print(f"Total Votes: {ballot_count}")
     print("-----------------------------")
-
+    # Individual results + print statements
+    for candidate in candidate_list:
+        percent = round((candidate_total[candidate] / ballot_count) * 100, 3)
+        print(f"{candidate}: {percent}% ({candidate_total[candidate]})")
     print("-----------------------------")
+    print(f"Winner: {winner}")
     print("-----------------------------")
