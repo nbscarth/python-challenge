@@ -1,8 +1,7 @@
 import os
 import csv
 
-csv_path = r"D:\Scarthicus\Documents\Bootcamp\Challenges\Module_3\python-challenge\PyBank"
-budget_csv = os.path.join(csv_path,"Resources","budget_data.csv")
+budget_csv = os.path.join("Resources/budget_data.csv")
 
 with open(budget_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
@@ -63,7 +62,7 @@ with open(budget_csv) as csvfile:
     print(f"Greatest Increase in Profits: {increase_month} (${increase})")
     print(f"Greatest Decrease in Profits: {decrease_month} (${decrease})")
 
-output_file = os.path.join(csv_path, "analysis", "final_analysis.txt")
+output_file = os.path.join("analysis/final_analysis.txt")
 
 with open(output_file, "w") as textfile:
     writer = csv.writer(textfile, delimiter=",")

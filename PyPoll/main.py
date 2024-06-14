@@ -1,8 +1,7 @@
 import os
 import csv
 
-csvpath = r"D:\Scarthicus\Documents\Bootcamp\Challenges\Module_3\python-challenge\PyPoll"
-election_csv = os.path.join(csvpath, "Resources", "election_data.csv")
+election_csv = os.path.join("Resources/election_data.csv")
 
 with open(election_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
@@ -52,7 +51,7 @@ with open(election_csv) as csvfile:
     print(f"Winner: {winner}")
     print("-----------------------------")
 
-output_file = os.path.join(csvpath, "analysis", "election_results.txt")
+output_file = os.path.join("analysis/election_results.txt")
 
 with open(output_file, "w") as textfile:
     writer = csv.writer(textfile, delimiter=",")
