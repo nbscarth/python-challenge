@@ -1,7 +1,8 @@
 import os
 import csv
 
-budget_csv = os.path.join("Resources/budget_data.csv")
+# Pathing from python-challenge repo
+budget_csv = os.path.join("PyBank/Resources/budget_data.csv")
 
 with open(budget_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
@@ -9,6 +10,7 @@ with open(budget_csv) as csvfile:
     # Gets header and skips for following code
     csv_header = next(csv_reader)
     
+    # Variables
     total_months = 0
     total_PL = 0
     pl_changes = []
@@ -18,8 +20,10 @@ with open(budget_csv) as csvfile:
     dates = []
 
     for row in csv_reader:
+        # Tallies months
         total_months += 1
 
+        # Sums profit/loss
         column2 = int(row[1])
         total_PL += column2 
 
@@ -62,7 +66,8 @@ with open(budget_csv) as csvfile:
     print(f"Greatest Increase in Profits: {increase_month} (${increase})")
     print(f"Greatest Decrease in Profits: {decrease_month} (${decrease})")
 
-output_file = os.path.join("analysis/final_analysis.txt")
+# Export results
+output_file = os.path.join("PyBank/analysis/final_analysis.txt")
 
 with open(output_file, "w") as textfile:
     writer = csv.writer(textfile, delimiter=",")

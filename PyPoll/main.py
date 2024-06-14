@@ -1,13 +1,15 @@
 import os
 import csv
 
-election_csv = os.path.join("Resources/election_data.csv")
+# Pathing from python-challenge repo
+election_csv = os.path.join("PyPoll/Resources/election_data.csv")
 
 with open(election_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
 
     csv_header = next(csv_reader)
 
+    # Variables for loops
     ballot_count = 0
     candidate_list = []
     votes = []
@@ -51,7 +53,8 @@ with open(election_csv) as csvfile:
     print(f"Winner: {winner}")
     print("-----------------------------")
 
-output_file = os.path.join("analysis/election_results.txt")
+# Results Export
+output_file = os.path.join("PyPoll/analysis/election_results.txt")
 
 with open(output_file, "w") as textfile:
     writer = csv.writer(textfile, delimiter=",")
